@@ -30,7 +30,7 @@ module.exports = {
         const { id } = req.params;
         const client = req.body;
 
-        const selectClient = await Product.findOne({
+        const selectClient = await Client.findOne({
             where: {
                 id,
                 deletedAt: null,

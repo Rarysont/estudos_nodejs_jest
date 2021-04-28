@@ -21,9 +21,12 @@ module.exports = {
 
         const createPedido = {
             ...data,
-            value: data.price,
+            value: product.price,
             id_seller: product.id_seller,
         };
+
+        console.log(data);
+        console.log(createPedido);
 
         const pedidoResponse = await Pedido.create(createPedido);
         return res.json(pedidoResponse);

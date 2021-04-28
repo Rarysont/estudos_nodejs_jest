@@ -27,10 +27,10 @@ routes.put('/sellers/:id', SellerController.updateSellerById);
 // ROTAS DO CLIENTE 
 
 routes.post('/clients', ClientController.createClient);
-routes.get('/sellers', ClientController.getAllClients);
-routes.get('/sellers/:id', ClientController.getClientById);
-routes.delete('/sellers/:id', ClientController.deleteClient);
-routes.put('/sellers/:id', ClientController.updateClientById);
+routes.get('/clients', ClientController.getAllClients);
+routes.get('/clients/:id', ClientController.getClientById);
+routes.delete('/clients/:id', ClientController.deleteClient);
+routes.put('/clients/:id', ClientController.updateClientById);
 
 // ROTAS DE PEDIDOS
 
