@@ -184,6 +184,7 @@ describe("Test pedido", () => {
         const response = await request(app)
             .put(`/pedido/${responsePedidoCreated.body.id}`)
             .send({
+                id_seller: responseSellerCreated.body.id,
                 id_product: responseProductCreated.body.id,
                 id_client: responseClientCreated.body.id,
                 accept: "true",
