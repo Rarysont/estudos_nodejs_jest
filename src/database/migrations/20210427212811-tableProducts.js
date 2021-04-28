@@ -3,9 +3,13 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('products', {
-      uuid: {
+      id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
+      },
+      id_seller: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       name: {
         type: Sequelize.STRING,

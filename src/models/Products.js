@@ -4,11 +4,12 @@ const { v4: uuidv4 } = require('uuid');
 class Products extends Model {
     static init(sequelize) {
         super.init({
-            uuid: {
+            id: {
                 type: DataTypes.UUID,
                 primaryKey: true,
                 defaultValue: () => uuidv4(),
             },
+            id_seller: DataTypes.STRING,
             name: DataTypes.STRING,
             description: DataTypes.STRING,
             price: DataTypes.DECIMAL(10, 2),

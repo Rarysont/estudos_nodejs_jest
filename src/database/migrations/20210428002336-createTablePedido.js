@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('pedidos', {
-      uuid: {
+      id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
@@ -13,19 +13,16 @@ module.exports = {
       },
       id_seller: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       id_client: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      status: {
+      accept: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
       },
       value: {
         type: Sequelize.DECIMAL(10, 2),
-        allowNull: false,
       },
       description: {
         type: Sequelize.STRING,

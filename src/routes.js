@@ -3,6 +3,7 @@ const express = require('express');
 const ProductController = require('./controllers/ProductController');
 const SellerController = require('./controllers/SellerController');
 const ClientController = require('./controllers/ClientController');
+const PedidoController = require('./controllers/PedidosController');
 
 const routes = express.Router();
 
@@ -30,6 +31,14 @@ routes.get('/sellers', ClientController.getAllClients);
 routes.get('/sellers/:id', ClientController.getClientById);
 routes.delete('/sellers/:id', ClientController.deleteClient);
 routes.put('/sellers/:id', ClientController.updateClientById);
+
+// ROTAS DE PEDIDOS
+
+routes.post('/pedido', PedidoController.createPedido);
+routes.get('/pedido', PedidoController.getAllPedidos);
+routes.get('/pedido/:id', PedidoController.getPedidoById);
+routes.delete('/pedido/:id', PedidoController.deletePedido);
+routes.put('/pedido/:id', PedidoController.updatePedidoById);
 
 
 module.exports = routes;

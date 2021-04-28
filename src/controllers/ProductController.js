@@ -1,7 +1,27 @@
 const moment = require('moment');
 const Product = require('../models/Products');
+const Seller = require('../models/Seller');
+
 
 module.exports = {
+  async createProduct(req, res) {
+    const sellerId = req.body.id_seller;
+    console.log(sellerId);
+    const seller = await Seller.findOne({
+      where: {
+        id: sellerId,
+        deletedAt: null,
+      }
+    });
+
+    if (!seller) {
+      return res.status(400).json({ error: 'Seller not found!' });
+    }
+
+    const products = await Product.create(req.body);
+    return res.json(products);
+  },
+
   async getAllProducts(req, res) {
     const products = await Product.findAll({
       where: {
@@ -9,11 +29,6 @@ module.exports = {
       },
     });
 
-    return res.json(products);
-  },
-
-  async createProduct(req, res) {
-    const products = await Product.create(req.body);
     return res.json(products);
   },
 
@@ -32,6 +47,7 @@ module.exports = {
     const { id } = req.params;
     const product = req.body;
 
+    console.log(id);
     console.log(product);
     const products = await Product.findOne({
       where: {
@@ -39,6 +55,12 @@ module.exports = {
         deletedAt: null,
       },
     });
+
+    console.log(products);
+
+    if (product.id_seller !== products.id_seller) {
+      return res.status(400).json({ error: 'Different sellers!' });
+    }
 
     if (!products) {
       return res.status(400).json({ error: 'Product not found!' });
