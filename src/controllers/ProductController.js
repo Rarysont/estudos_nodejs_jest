@@ -6,7 +6,6 @@ const Seller = require('../models/Seller');
 module.exports = {
   async createProduct(req, res) {
     const sellerId = req.body.id_seller;
-    console.log(sellerId);
     const seller = await Seller.findOne({
       where: {
         id: sellerId,
@@ -46,17 +45,12 @@ module.exports = {
   async updateProductById(req, res) {
     const { id } = req.params;
     const product = req.body;
-
-    console.log(id);
-    console.log(product);
     const products = await Product.findOne({
       where: {
         id,
         deletedAt: null,
       },
     });
-
-    console.log(products);
 
     if (product.id_seller !== products.id_seller) {
       return res.status(400).json({ error: 'Different sellers!' });

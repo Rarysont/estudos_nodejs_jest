@@ -1,6 +1,7 @@
 const moment = require('moment');
 const Pedido = require('../models/Pedido');
 const Client = require('../models/Client');
+const Seller = require('../models/Seller');
 const Product = require('../models/Products');
 
 module.exports = {
@@ -24,9 +25,6 @@ module.exports = {
             value: product.price,
             id_seller: product.id_seller,
         };
-
-        console.log(data);
-        console.log(createPedido);
 
         const pedidoResponse = await Pedido.create(createPedido);
         return res.json(pedidoResponse);
@@ -64,6 +62,17 @@ module.exports = {
 
         if (!selectPedido) {
             return res.status(400).json({ error: 'Pedido not found!' });
+        }
+
+        const selectOwnerProduct = await Seller.findOne({
+            where: {
+                id: pedido.id_seller,
+                deletedAt: null,
+            },
+        });
+
+        if (!selectOwnerProduct) {
+            return res.status(400).json({ error: 'Owner Product not found!' });
         }
 
         await Pedido.update(pedido, {
